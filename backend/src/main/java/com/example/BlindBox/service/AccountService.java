@@ -7,4 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AccountService {
     String register(AccountVO accountVO);
+    String login(AccountVO accountVO);
+    String getUserMessage(String token);
+    String updateUserMessage(AccountVO accountVO);
 }

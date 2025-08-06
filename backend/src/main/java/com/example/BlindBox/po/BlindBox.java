@@ -7,11 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "blind_box")
 public class BlindBox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,12 +25,16 @@ public class BlindBox {
     private Integer createUserId;//创建的用户
 
     @Basic
+    @Column(name = "blindBoxName")
+    private String blindBoxName;//盲盒名称
+
+    @Basic
     @Column(name = "description")
     private String description;//盲盒描述
 
     @Basic
     @Column(name = "price")
-    private String price;//盲盒价格
+    private Integer price;//盲盒价格
 
     @Basic
     @Column(name = "lastQuantity")
@@ -46,18 +52,21 @@ public class BlindBox {
     @Column(name = "cover")
     private String cover;//盲盒中奖的图片
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "blindBoxWinnerId", joinColumns = @JoinColumn(name = "blindBoxId"))
     @Column(name = "winnerId")
-    private ArrayList<Integer> winnerId;//已经抽中的人的id
+    private List<Integer> winnerId = new ArrayList<>();//已经抽中的人的id
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "blindComments", joinColumns = @JoinColumn(name = "blindBoxId"))
     @Column(name = "comments")
-    private ArrayList<String> comments;//人们对该盲盒的评论
+    private List<String> comments = new ArrayList<>();//人们对该盲盒的评论
 
     public BlindBoxVO toVO(){
         BlindBoxVO blindBoxVO=new BlindBoxVO();
         blindBoxVO.setId(id);
         blindBoxVO.setCreateUserId(createUserId);
+        blindBoxVO.setBlindBoxName(blindBoxName);
         blindBoxVO.setDescription(description);
         blindBoxVO.setPrice(price);
         blindBoxVO.setLastQuantity(lastQuantity);

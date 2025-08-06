@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,19 +15,21 @@ import java.util.ArrayList;
 public class BlindBoxVO {
     private Integer id;
     private Integer createUserId;
+    private String blindBoxName;
     private String description;
-    private String price;
+    private Integer price;
     private Integer lastQuantity;
     private Integer winQuantity;
     private Integer maxWinQuantity;
     private String cover;
-    private ArrayList<Integer> winnerId;
-    private ArrayList<String> comments;
+    private List<Integer> winnerId;
+    private List<String> comments;
 
     public BlindBox toPO(){
         BlindBox blindBox=new BlindBox();
         blindBox.setId(id);
         blindBox.setCreateUserId(createUserId);
+        blindBox.setBlindBoxName(blindBoxName);
         blindBox.setDescription(description);
         blindBox.setPrice(price);
         blindBox.setLastQuantity(lastQuantity);

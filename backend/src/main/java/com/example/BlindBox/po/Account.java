@@ -7,11 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "account")
 public class Account {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +29,25 @@ public class Account {
     @Column(name = "password")
     private String password;//用户密码
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "accountCreatedBlindboxIds", joinColumns = @JoinColumn(name = "accountId"))
     @Column(name = "createdBlindBoxId")
-    private ArrayList<Integer> createdBlindBoxId = new ArrayList<>();//用户创建的盲盒
+    private List<Integer> createdBlindBoxId = new ArrayList<>();//用户创建的盲盒
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "accountOwnBlindboxIds", joinColumns = @JoinColumn(name = "accountId"))
     @Column(name = "ownBlindBoxId")
-    private ArrayList<Integer> ownBlindBoxId = new ArrayList<>();//用户抽取到的盲盒
+    private List<Integer> ownBlindBoxId = new ArrayList<>();//用户抽取到的盲盒
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "accountParticipateBlindBoxId", joinColumns = @JoinColumn(name = "accountId"))
     @Column(name = "participateBlindBoxId")
-    private ArrayList<Integer> participateBlindBoxId = new ArrayList<>();//用户参与过的盲盒
+    private List<Integer> participateBlindBoxId = new ArrayList<>();//用户参与过的盲盒
 
-    @Basic
+    @ElementCollection
+    @CollectionTable(name = "accountParticipateBlindBoxTime", joinColumns = @JoinColumn(name = "accountId"))
     @Column(name = "participateBlindBoxTime")
-    private ArrayList<Integer> participateBlindBoxTime = new ArrayList<>();//用户参与过的盲盒中抽了但未中的次数
+    private List<Integer> participateBlindBoxTime = new ArrayList<>();//用户参与过的盲盒中抽了但未中的次数
 
     public AccountVO toVO(){
         AccountVO accountVO = new AccountVO();

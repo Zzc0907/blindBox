@@ -24,7 +24,7 @@ target/
 .sts4-cache
 application.yml
 backend/src/main/resources/application.yml
-.idea
+src/main/resources/application.yml
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

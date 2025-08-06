@@ -36,4 +36,43 @@ public class AccountController {
             return Response.buildFailure("400",res);
         }
     }
+
+    /**
+     * 用户登录
+     */
+    @PostMapping("/login")
+    public Response login(@RequestBody AccountVO accountVO){
+        String token=accountService.login(accountVO);
+        if(token=="false"){
+            return Response.buildFailure("400","用户名或密码错误");
+        }else{
+            return Response.buildSuccess(token);
+        }
+    }
+
+    /**
+     * 获取用户信息
+     */
+    @GetMapping
+    public Response getUserMessage(@RequestHeader("token") String token){
+        String res=accountService.getUserMessage(token);
+        if(res=="true"){
+            return Response.buildSuccess(tokenUtil.getAccount(token));
+        }else{
+            return Response.buildFailure("400",res);
+        }
+    }
+
+    /**
+     * 更新用户信息
+     */
+    @PutMapping
+    public Response updateUserMessage(@RequestBody AccountVO accountVO){
+        String res=accountService.updateUserMessage(accountVO);
+        if(res=="更新成功"){
+            return Response.buildSuccess(res);
+        }else{
+            return Response.buildFailure("400",res);
+        }
+    }
 }

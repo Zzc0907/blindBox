@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +16,10 @@ public class AccountVO {
     private Integer id;
     private String username;
     private String password;
-    private ArrayList<Integer> createdBlindBoxId ;
-    private ArrayList<Integer> ownBlindBoxId;
-    private ArrayList<Integer> participateBlindBoxId;
-    private ArrayList<Integer> participateBlindBoxIdTime;
+    private List<Integer> createdBlindBoxId ;
+    private List<Integer> ownBlindBoxId;
+    private List<Integer> participateBlindBoxId;
+    private List<Integer> participateBlindBoxIdTime;
 
     public Account toPO(){
         Account account = new Account();
