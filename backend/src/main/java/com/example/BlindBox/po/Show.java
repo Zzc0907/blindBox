@@ -37,7 +37,7 @@ public class Show {
     @ElementCollection
     @CollectionTable(name = "showComment", joinColumns = @JoinColumn(name = "showId"))
     @Column(name = "comment")
-    private List<String> comment = new ArrayList<>();//评论用户的id
+    private List<String> comment = new ArrayList<>();//评论用户的内容
 
     public ShowVO toVO(){
         ShowVO showVO = new ShowVO();

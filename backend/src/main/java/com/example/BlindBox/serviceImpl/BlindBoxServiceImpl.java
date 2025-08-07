@@ -95,4 +95,24 @@ public class BlindBoxServiceImpl implements BlindBoxService {
             return "该用户不存在";
         }
     }
+
+    @Override
+    public String makeComment(Integer userId,Integer blindBoxId,String comment){
+        Optional<Account> thisAccount=accountRepository.findById(userId);
+        if(thisAccount.isPresent()){
+            Account account=thisAccount.get();
+            Optional<BlindBox> thisBlindBox=blindBoxRepository.findById(blindBoxId);
+            if (thisBlindBox.isPresent()) {
+                BlindBox blindBox=thisBlindBox.get();
+                blindBox.getCommentUserName().add(account.getUsername());
+                blindBox.getComments().add(comment);
+                blindBoxRepository.save(blindBox);
+                return "评论成功";
+            }else{
+                return "该盲盒不存在";
+            }
+        }else{
+            return "该用户不存在";
+        }
+    }
 }

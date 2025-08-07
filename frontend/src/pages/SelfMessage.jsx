@@ -98,18 +98,30 @@ function SelfMessage() {
     };
 
     const handlePasswordUpdate = async () => {
-        if (passwords.newPassword !== passwords.confirmPassword) {
+        const { newPassword, confirmPassword } = passwords;
+
+        if (!newPassword || !confirmPassword) {
+            alert("密码不能为空");
+            return;
+        }
+
+        if (/\s/.test(newPassword) || /\s/.test(confirmPassword)) {
+            alert("密码中不能包含空格");
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
             alert("新密码和确认密码不一致");
             return;
         }
 
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.put(
+            const res = await axios.get(
                 "/api/accounts",
                 {
                     username: userInfo.username,
-                    password: passwords.newPassword,
+                    password: newPassword,
                 },
                 {
                     headers: { token },
@@ -128,6 +140,7 @@ function SelfMessage() {
             alert("请求错误");
         }
     };
+
 
     if (loading) {
         return <div className="text-center text-gray-500 mt-10">加载中...</div>;

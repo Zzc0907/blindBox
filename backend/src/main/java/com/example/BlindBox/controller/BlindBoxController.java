@@ -123,4 +123,17 @@ public class BlindBoxController {
         }
         return Response.buildSuccess(thisBlindBox);
     }
+
+    /**
+     * 对盲盒进行评论
+     */
+    @PutMapping
+    public Response makeComment(@RequestParam Integer userId,@RequestParam Integer blindBoxId,@RequestParam String comment){
+        String res=blindBoxService.makeComment(userId,blindBoxId,comment);
+        if(res=="评论成功"){
+            return Response.buildSuccess(res);
+        }else{
+            return Response.buildFailure("400",res);
+        }
+    }
 }

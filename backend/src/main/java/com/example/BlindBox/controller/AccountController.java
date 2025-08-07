@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Optional;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/accounts")
@@ -51,7 +53,7 @@ public class AccountController {
     }
 
     /**
-     * 获取用户信息
+     * 获取用户信息(通过token)
      */
     @GetMapping
     public Response getUserMessage(@RequestHeader("token") String token){
@@ -60,6 +62,19 @@ public class AccountController {
             return Response.buildSuccess(tokenUtil.getAccount(token));
         }else{
             return Response.buildFailure("400",res);
+        }
+    }
+
+    /**
+     * 获取用户信息(通过id)
+     */
+    @GetMapping("/{userId}")
+    public Response getUserMessageById(@PathVariable Integer userId){
+        Optional<Account> account=accountRepository.findById(userId);
+        if(account.isPresent()){
+            return Response.buildSuccess(account.get());
+        }else{
+            return Response.buildFailure("400","该用户不存在");
         }
     }
 
