@@ -4,26 +4,11 @@ import { useNavigate } from "react-router-dom";
 function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState("");//确认密码
-    const [avatar, setAvatar] = useState(null);
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const navigate = useNavigate();
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const imageURL = URL.createObjectURL(file);
-            setAvatar(imageURL);
-        } else {
-            setAvatar(null); // 没选就置空
-        }
-    };
-
-    const handleRemoveImage = () => {
-        setAvatar(null);
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!username || !password) {
@@ -39,11 +24,30 @@ function Register() {
         const userData = {
             username,
             password,
-            avatar: avatar || null,
         };
 
-        console.log("注册用户信息：", userData);
-        alert(`注册成功\n用户名：${username}\n头像：${avatar ? avatar : "未上传"}`);
+        try {
+            const response = await fetch("http://localhost:8080/api/accounts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
+
+            const result = await response.json();
+
+            if (result.code === "200") {
+                alert(result.data);
+                //注册成功后跳转
+                navigate("/login");
+            } else {
+                alert("注册失败：" + result.msg);
+            }
+        } catch (error) {
+            console.error("注册请求出错：", error);
+            alert("注册失败，请检查网络连接或稍后再试");
+        }
     };
 
     return (
@@ -80,31 +84,6 @@ function Register() {
                             required
                             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium mb-1">头像上传（可选）</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            className="w-full"
-                        />
-                        {avatar && (
-                            <div className="mt-2 flex flex-col items-center">
-                                <img
-                                    src={avatar}
-                                    alt="头像预览"
-                                    className="w-24 h-24 object-cover rounded-full border"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={handleRemoveImage}
-                                    className="mt-2 text-sm text-red-500 hover:underline"
-                                >
-                                    移除头像
-                                </button>
-                            </div>
-                        )}
                     </div>
                     <button
                         type="submit"

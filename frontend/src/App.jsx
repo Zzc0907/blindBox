@@ -11,6 +11,8 @@ import AllBlindBox from "./pages/AllBlindBox"
 import MyBlindBox from "./pages/MyBlindBox"
 import BlindBoxDetails from "./pages/BlindBoxDetails"
 import FindBlindBox from "./pages/FindBlindBox"
+import Showing from "./pages/Showing";
+import Layout from "./components/Layout";
 
 function App() {
     return (
@@ -25,17 +27,22 @@ function App() {
             <div className="relative z-10 min-h-screen">
                 <BrowserRouter>
                     <Routes>
+                        {/* 不显示导航栏的页面 */}
                         <Route path="*" element={<Login />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-                        <Route path="/SelfMessage/:id" element={<SelfMessage />} />
-                        <Route path="/CreateBlindBox" element={<CreateBlindBox />} />
-                        <Route path="/GetBlindBox" element={<GetBlindBox />} />
-                        <Route path="/BlindBoxOrder/:id" element={<BlindBoxOrder />} />
-                        <Route path="/AllBlindBox" element={<AllBlindBox />} />
-                        <Route path="/MyBlindBox/:id" element={<MyBlindBox />} />
-                        <Route path="/BlindBoxDetails/:id" element={<BlindBoxDetails />} />
-                        <Route path="/FindBlindBox" element={<FindBlindBox />} />
+                        {/* 显示导航栏的页面 */}
+                        <Route element={<Layout />}>
+                            <Route path="/SelfMessage" element={<SelfMessage />} />
+                            <Route path="/CreateBlindBox" element={<CreateBlindBox />} />
+                            <Route path="/GetBlindBox" element={<GetBlindBox />} />
+                            <Route path="/BlindBoxOrder/:id" element={<BlindBoxOrder />} />
+                            <Route path="/AllBlindBox" element={<AllBlindBox />} />
+                            <Route path="/MyBlindBox/:id" element={<MyBlindBox />} />
+                            <Route path="/BlindBoxDetails/:id" element={<BlindBoxDetails />} />
+                            <Route path="/FindBlindBox" element={<FindBlindBox />} />
+                            <Route path="/Showing" element={<Showing />} />
+                        </Route>
                     </Routes>
                 </BrowserRouter>
             </div>
