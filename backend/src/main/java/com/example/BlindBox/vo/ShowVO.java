@@ -18,6 +18,46 @@ public class ShowVO {
     private List<String> commentUserName;
     private List<String> comment;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public List<String> getCommentUserName() {
+        return commentUserName;
+    }
+
+    public void setCommentUserName(List<String> commentUserName) {
+        this.commentUserName = commentUserName;
+    }
+
+    public List<String> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<String> comment) {
+        this.comment = comment;
+    }
+
     public Show toPO(){
         Show show =new Show();
         show.setId(id);
