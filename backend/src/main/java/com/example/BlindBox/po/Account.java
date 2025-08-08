@@ -59,6 +59,78 @@ public class Account {
     @Column(name = "blindBoxOrderResult")
     private List<String> blindBoxOrderResult = new ArrayList<>();//用户抽的盲盒的结果
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Integer> getCreatedBlindBoxId() {
+        return createdBlindBoxId;
+    }
+
+    public void setCreatedBlindBoxId(List<Integer> createdBlindBoxId) {
+        this.createdBlindBoxId = createdBlindBoxId;
+    }
+
+    public List<Integer> getOwnBlindBoxId() {
+        return ownBlindBoxId;
+    }
+
+    public void setOwnBlindBoxId(List<Integer> ownBlindBoxId) {
+        this.ownBlindBoxId = ownBlindBoxId;
+    }
+
+    public List<Integer> getParticipateBlindBoxId() {
+        return participateBlindBoxId;
+    }
+
+    public void setParticipateBlindBoxId(List<Integer> participateBlindBoxId) {
+        this.participateBlindBoxId = participateBlindBoxId;
+    }
+
+    public List<Integer> getParticipateBlindBoxTime() {
+        return participateBlindBoxTime;
+    }
+
+    public void setParticipateBlindBoxTime(List<Integer> participateBlindBoxTime) {
+        this.participateBlindBoxTime = participateBlindBoxTime;
+    }
+
+    public List<Integer> getBlindBoxIdOrder() {
+        return blindBoxIdOrder;
+    }
+
+    public void setBlindBoxIdOrder(List<Integer> blindBoxIdOrder) {
+        this.blindBoxIdOrder = blindBoxIdOrder;
+    }
+
+    public List<String> getBlindBoxOrderResult() {
+        return blindBoxOrderResult;
+    }
+
+    public void setBlindBoxOrderResult(List<String> blindBoxOrderResult) {
+        this.blindBoxOrderResult = blindBoxOrderResult;
+    }
+
     public AccountVO toVO(){
         AccountVO accountVO = new AccountVO();
         accountVO.setId(this.id);

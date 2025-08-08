@@ -27,6 +27,78 @@ public class AccountVO {
     private List<Integer> blindBoxIdOrder;
     private List<String> blindBoxOrderResult;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Integer> getCreatedBlindBoxId() {
+        return createdBlindBoxId;
+    }
+
+    public void setCreatedBlindBoxId(List<Integer> createdBlindBoxId) {
+        this.createdBlindBoxId = createdBlindBoxId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Integer> getOwnBlindBoxId() {
+        return ownBlindBoxId;
+    }
+
+    public void setOwnBlindBoxId(List<Integer> ownBlindBoxId) {
+        this.ownBlindBoxId = ownBlindBoxId;
+    }
+
+    public List<Integer> getParticipateBlindBoxId() {
+        return participateBlindBoxId;
+    }
+
+    public void setParticipateBlindBoxId(List<Integer> participateBlindBoxId) {
+        this.participateBlindBoxId = participateBlindBoxId;
+    }
+
+    public List<Integer> getParticipateBlindBoxIdTime() {
+        return participateBlindBoxIdTime;
+    }
+
+    public void setParticipateBlindBoxIdTime(List<Integer> participateBlindBoxIdTime) {
+        this.participateBlindBoxIdTime = participateBlindBoxIdTime;
+    }
+
+    public List<Integer> getBlindBoxIdOrder() {
+        return blindBoxIdOrder;
+    }
+
+    public void setBlindBoxIdOrder(List<Integer> blindBoxIdOrder) {
+        this.blindBoxIdOrder = blindBoxIdOrder;
+    }
+
+    public List<String> getBlindBoxOrderResult() {
+        return blindBoxOrderResult;
+    }
+
+    public void setBlindBoxOrderResult(List<String> blindBoxOrderResult) {
+        this.blindBoxOrderResult = blindBoxOrderResult;
+    }
+
     public Account toPO(){
         Account account = new Account();
         account.setId(id);
