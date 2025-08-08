@@ -1,3 +1,4 @@
+// Showing.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -139,10 +140,25 @@ export default function Showing() {
                 alert("发帖成功");
                 setPostDetail("");
                 setShowPostModal(false);
-                // 刷新买家秀数据
+                // ✅ 关键修改：刷新数据并更新 userMap
                 const refresh = await axios.get("/api/show");
                 if (refresh.data.code === "200") {
-                    setShows(refresh.data.data);
+                    const newShows = refresh.data.data;
+                    setShows(newShows);
+
+                    // 重新获取所有用户信息并更新 userMap
+                    const userIds = [...new Set(newShows.map(show => show.userId))];
+                    const userRequests = userIds.map(id =>
+                        axios.get(`/api/accounts/${id}`)
+                            .then(r => ({ id, username: r.data.data.username }))
+                            .catch(() => ({ id, username: "未知用户" }))
+                    );
+                    const users = await Promise.all(userRequests);
+                    const newUserMap = {};
+                    users.forEach(u => {
+                        newUserMap[u.id] = u.username;
+                    });
+                    setUserMap(newUserMap);
                 }
             } else {
                 alert(res.data.msg || "发帖失败");
@@ -176,7 +192,8 @@ export default function Showing() {
             {shows.length === 0 ? (
                 <div className="text-gray-500 text-center py-8">暂无买家秀</div>
             ) : (
-                <div className="grid grid-cols-2 gap-6">
+                // 修改：使用 flex 列布局，每行一个
+                <div className="flex flex-col space-y-6">
                     {shows.map(show => {
                         // 获取该帖子创建者的用户名
                         const posterUsername = userMap[show.userId] || `用户ID ${show.userId}`;

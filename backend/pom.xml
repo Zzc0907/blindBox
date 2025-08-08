@@ -98,7 +98,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.BlindBox.Main</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>

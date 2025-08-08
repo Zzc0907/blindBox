@@ -16,9 +16,9 @@ spring:
 server:
   port: 8080
 
-aliyun:
-  oss:
-    endpoint: oss-cn-hangzhou.aliyuncs.com
-    accessKeyId: LTAI5t8EjSmpBHbEQWsZcf7V
-    accessKeySecret: DS3o0ZmHmOGuWTGHUvpSt8KeZp7bK8
-    bucketName: my-bucket070011
+#aliyun:
+#  oss:
+#    endpoint:
+#    accessKeyId:
+#    accessKeySecret:
+#    bucketName:

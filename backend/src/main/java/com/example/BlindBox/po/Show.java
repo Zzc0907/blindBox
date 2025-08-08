@@ -39,6 +39,46 @@ public class Show {
     @Column(name = "comment")
     private List<String> comment = new ArrayList<>();//评论用户的内容
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public List<String> getCommentUserName() {
+        return commentUserName;
+    }
+
+    public void setCommentUserName(List<String> commentUserName) {
+        this.commentUserName = commentUserName;
+    }
+
+    public List<String> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<String> comment) {
+        this.comment = comment;
+    }
+
     public ShowVO toVO(){
         ShowVO showVO = new ShowVO();
         showVO.setId(id);
