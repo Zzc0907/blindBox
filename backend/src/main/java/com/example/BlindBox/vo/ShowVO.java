@@ -15,7 +15,7 @@ public class ShowVO {
     private Integer id;
     private Integer userId;
     private String detail;
-    private List<Integer> commentUserId;
+    private List<String> commentUserName;
     private List<String> comment;
 
     public Show toPO(){
@@ -23,7 +23,7 @@ public class ShowVO {
         show.setId(id);
         show.setUserId(userId);
         show.setDetail(detail);
-        show.setCommentUserId(commentUserId);
+        show.setCommentUserName(commentUserName);
         show.setComment(comment);
         return show;
     }

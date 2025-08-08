@@ -23,6 +23,7 @@ public class BlindBoxVO {
     private Integer maxWinQuantity;
     private String cover;
     private List<Integer> winnerId;
+    private List<String> commentUserName;
     private List<String> comments;
 
     public BlindBox toPO(){
@@ -37,6 +38,7 @@ public class BlindBoxVO {
         blindBox.setMaxWinQuantity(maxWinQuantity);
         blindBox.setCover(cover);
         blindBox.setWinnerId(winnerId);
+        blindBox.setCommentUserName(commentUserName);
         blindBox.setComments(comments);
         return blindBox;
     }

@@ -9,4 +9,6 @@ public interface BlindBoxService {
     String createBlindBox(Integer userId, BlindBoxVO blindBoxVO);
 
     String getBlindBox(Integer blindBoxId, Integer userId);
+
+    String makeComment(Integer userId,Integer blindBoxId,String comment);
 }

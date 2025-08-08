@@ -58,6 +58,11 @@ public class BlindBox {
     private List<Integer> winnerId = new ArrayList<>();//已经抽中的人的id
 
     @ElementCollection
+    @CollectionTable(name = "blindCommentUserName", joinColumns = @JoinColumn(name = "blindBoxId"))
+    @Column(name = "commentsUserName")
+    private List<String> commentUserName = new ArrayList<>();//对该盲盒进行评论过的人
+
+    @ElementCollection
     @CollectionTable(name = "blindComments", joinColumns = @JoinColumn(name = "blindBoxId"))
     @Column(name = "comments")
     private List<String> comments = new ArrayList<>();//人们对该盲盒的评论
@@ -74,6 +79,7 @@ public class BlindBox {
         blindBoxVO.setMaxWinQuantity(maxWinQuantity);
         blindBoxVO.setCover(cover);
         blindBoxVO.setWinnerId(winnerId);
+        blindBoxVO.setCommentUserName(commentUserName);
         blindBoxVO.setComments(comments);
         return blindBoxVO;
     }

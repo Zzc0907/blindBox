@@ -49,6 +49,16 @@ public class Account {
     @Column(name = "participateBlindBoxTime")
     private List<Integer> participateBlindBoxTime = new ArrayList<>();//用户参与过的盲盒中抽了但未中的次数
 
+    @ElementCollection
+    @CollectionTable(name = "accountBlindBoxIdOrder", joinColumns = @JoinColumn(name = "accountId"))
+    @Column(name = "blindBoxIdOrder")
+    private List<Integer> blindBoxIdOrder = new ArrayList<>();//用户的盲盒订单Id
+
+    @ElementCollection
+    @CollectionTable(name = "accountBlindBoxOrderResult", joinColumns = @JoinColumn(name = "accountId"))
+    @Column(name = "blindBoxOrderResult")
+    private List<String> blindBoxOrderResult = new ArrayList<>();//用户抽的盲盒的结果
+
     public AccountVO toVO(){
         AccountVO accountVO = new AccountVO();
         accountVO.setId(this.id);
@@ -58,6 +68,8 @@ public class Account {
         accountVO.setOwnBlindBoxId(this.ownBlindBoxId);
         accountVO.setParticipateBlindBoxId(this.participateBlindBoxId);
         accountVO.setParticipateBlindBoxIdTime(this.participateBlindBoxTime);
+        accountVO.setBlindBoxIdOrder(this.blindBoxIdOrder);
+        accountVO.setBlindBoxOrderResult(this.blindBoxOrderResult);
         return accountVO;
     }
 }

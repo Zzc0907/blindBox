@@ -1,12 +1,15 @@
 package com.example.BlindBox.serviceImpl;
 
+import com.example.BlindBox.po.Account;
 import com.example.BlindBox.po.Show;
+import com.example.BlindBox.repository.AccountRepository;
 import com.example.BlindBox.repository.ShowRepository;
 import com.example.BlindBox.service.ShowService;
 import com.example.BlindBox.vo.ShowVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,9 @@ import java.util.Optional;
 public class ShowServiceImpl implements ShowService {
     @Autowired
     private ShowRepository showRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Override
     public String createShow(ShowVO showVO){
@@ -50,7 +56,9 @@ public class ShowServiceImpl implements ShowService {
         Optional<Show> show=showRepository.findById(showId);
         if(show.isPresent()){
             Show thisShow=show.get();
-            thisShow.getCommentUserId().add(userId);
+            Optional<Account> thisAccount=accountRepository.findById(userId);
+            Account account=thisAccount.get();
+            thisShow.getCommentUserName().add(account.getUsername());
             thisShow.getComment().add(comment);
             showRepository.save(thisShow);
             return "评论成功";
