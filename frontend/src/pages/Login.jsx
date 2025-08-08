@@ -27,10 +27,8 @@ function Login() {
 
             if (result.code === "200") {
                 setSuccessMsg("登录成功，正在跳转...");
-                // 存储 token（可选）
+                // 存储 token
                 localStorage.setItem("token", result.data);
-
-                // 1.5 秒后跳转
                 setTimeout(() => {
                     navigate("/Allblindbox");
                 }, 1500);

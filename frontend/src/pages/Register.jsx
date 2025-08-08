@@ -39,7 +39,7 @@ function Register() {
 
             if (result.code === "200") {
                 alert(result.data);
-                //注册成功后跳转
+                //注册成功后跳转到登录页面
                 navigate("/login");
             } else {
                 alert("注册失败：" + result.msg);

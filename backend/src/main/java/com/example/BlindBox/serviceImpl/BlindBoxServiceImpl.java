@@ -55,6 +55,8 @@ public class BlindBoxServiceImpl implements BlindBoxService {
                     return "该盲盒已经被抽完了";
                 }
                 if(blindBox.getWinQuantity()<=0){
+                    account.getBlindBoxIdOrder().add(blindBoxId);
+                    account.getBlindBoxOrderResult().add("运气不佳哦,没有抽中~");
                     blindBox.setLastQuantity(blindBox.getLastQuantity()-1);
                     blindBoxRepository.save(blindBox);
                     return "运气不佳哦,没有抽中~";
@@ -75,6 +77,8 @@ public class BlindBoxServiceImpl implements BlindBoxService {
                 if(r<blindBox.getWinQuantity()||r1<1){
                     account.getOwnBlindBoxId().add(blindBoxId);
                     account.getParticipateBlindBoxTime().set(account.getParticipateBlindBoxId().indexOf(blindBoxId),0);
+                    account.getBlindBoxIdOrder().add(blindBoxId);
+                    account.getBlindBoxOrderResult().add("恭喜你，抽到了！");
                     blindBox.getWinnerId().add(userId);
                     blindBox.setLastQuantity(blindBox.getLastQuantity()-1);
                     blindBox.setWinQuantity(blindBox.getWinQuantity()-1);
@@ -83,6 +87,8 @@ public class BlindBoxServiceImpl implements BlindBoxService {
                     return "恭喜你，抽到了！";
                 }else{
                     account.getParticipateBlindBoxTime().set(account.getParticipateBlindBoxId().indexOf(blindBoxId),b+1);
+                    account.getBlindBoxIdOrder().add(blindBoxId);
+                    account.getBlindBoxOrderResult().add("运气不佳哦,没有抽中~");
                     blindBox.setLastQuantity(blindBox.getLastQuantity()-1);
                     accountRepository.save(account);
                     blindBoxRepository.save(blindBox);

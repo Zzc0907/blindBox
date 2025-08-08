@@ -30,9 +30,9 @@ public class Show {
     private String detail;//买家秀的具体内容
 
     @ElementCollection
-    @CollectionTable(name = "showCommentUserId", joinColumns = @JoinColumn(name = "showId"))
-    @Column(name = "commentUserId")
-    private List<Integer> commentUserId = new ArrayList<>();//评论用户的id
+    @CollectionTable(name = "showCommentUserName", joinColumns = @JoinColumn(name = "showId"))
+    @Column(name = "commentUserName")
+    private List<String> commentUserName = new ArrayList<>();//评论用户的用户名
 
     @ElementCollection
     @CollectionTable(name = "showComment", joinColumns = @JoinColumn(name = "showId"))
@@ -44,7 +44,7 @@ public class Show {
         showVO.setId(id);
         showVO.setUserId(userId);
         showVO.setDetail(detail);
-        showVO.setCommentUserId(commentUserId);
+        showVO.setCommentUserName(commentUserName);
         showVO.setComment(comment);
         return showVO;
     }

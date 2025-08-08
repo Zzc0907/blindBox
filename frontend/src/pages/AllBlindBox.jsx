@@ -9,9 +9,9 @@ function AllBlindBox() {
     const [userId, setUserId] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
     const [userMap, setUserMap] = useState({});
-    const [drawResult, setDrawResult] = useState(null); // 抽奖返回结果
+    const [drawResult, setDrawResult] = useState(null);
     const [showDrawConfirm, setShowDrawConfirm] = useState(false);
-    const [drawBox, setDrawBox] = useState(null); // 当前点击抽奖的盲盒
+    const [drawBox, setDrawBox] = useState(null);
 
     useEffect(() => {
         fetchUserId();
@@ -25,12 +25,10 @@ function AllBlindBox() {
             alert("用户未登录");
             return;
         }
-
         try {
             const res = await axios.get("/api/accounts", {
                 headers: { token },
             });
-
             if (res.data.code === "200") {
                 setUserId(res.data.data.id);
             } else {
@@ -46,11 +44,10 @@ function AllBlindBox() {
             const res = await axios.get("/api/blindBox/find", {
                 params: { blindBoxName: name },
             });
-
             if (res.data.code === "200") {
                 setBlindBoxes(res.data.data);
                 setExpandedId(null);
-                fetchWinnerUsernames(res.data.data); // 拉取所有中奖者的用户名
+                fetchWinnerUsernames(res.data.data);
             } else {
                 alert("获取盲盒信息失败：" + res.data.msg);
             }
@@ -81,7 +78,6 @@ function AllBlindBox() {
                 }
             })
         );
-
         setUserMap(newUserMap);
     };
 
@@ -99,12 +95,10 @@ function AllBlindBox() {
             alert("用户未登录");
             return;
         }
-
         if (commentText.trim() === "") {
             alert("评论内容不能为空");
             return;
         }
-
         try {
             const res = await axios.put("/api/blindBox", null, {
                 params: {
@@ -113,7 +107,6 @@ function AllBlindBox() {
                     comment: commentText.trim(),
                 },
             });
-
             if (res.data.code === "200") {
                 setSuccessMessage("评论成功");
                 setTimeout(() => setSuccessMessage(""), 1500);
@@ -135,15 +128,13 @@ function AllBlindBox() {
 
     const confirmDraw = async () => {
         if (!userId || !drawBox) return;
-
         try {
             const res = await axios.post(`/api/blindBox/${drawBox.id}`, null, {
                 params: { userId },
             });
-
             if (res.data.code === "200") {
                 setDrawResult(res.data.data);
-                fetchBlindBoxes(searchText.trim()); // 更新盲盒信息
+                fetchBlindBoxes(searchText.trim());
             } else {
                 setDrawResult(res.data.msg);
             }
@@ -162,30 +153,32 @@ function AllBlindBox() {
 
     return (
         <div className="max-w-6xl mx-auto mt-10 px-6">
-            <h1 className="text-3xl font-bold mb-6 text-white">盲盒商城</h1>
-
-            {successMessage && (
-                <div className="mb-4 p-3 rounded bg-green-100 text-green-700 border border-green-400">
-                    {successMessage}
+            {/* 搜索栏和标题 */}
+            <div className="bg-gray-800 pt-4 pb-2 px-6 rounded-t-lg shadow-md mb-6">
+                <h1 className="text-3xl font-bold text-white">盲盒商城</h1>
+                {successMessage && (
+                    <div className="mb-4 p-3 rounded bg-green-100 text-green-700 border border-green-400">
+                        {successMessage}
+                    </div>
+                )}
+                <div className="mb-6 flex space-x-2 ml-8">
+                    <input
+                        type="text"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        placeholder="搜索盲盒名称..."
+                        className="flex-1 px-4 py-2 border rounded ml-auto"
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    >
+                        搜索
+                    </button>
                 </div>
-            )}
-
-            <div className="mb-6 flex space-x-2">
-                <input
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    placeholder="搜索盲盒名称..."
-                    className="flex-1 px-4 py-2 border rounded"
-                />
-                <button
-                    onClick={handleSearch}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                >
-                    搜索
-                </button>
             </div>
 
+            {/* 盲盒列表 */}
             <div className="grid md:grid-cols-2 gap-6 items-start">
                 {blindBoxes.length === 0 ? (
                     <p className="text-white text-center col-span-2">暂无盲盒</p>
@@ -203,23 +196,18 @@ function AllBlindBox() {
                                         ? box.winnerId.map((id) => userMap[id] || id).join(", ")
                                         : "暂无"}
                                 </p>
-
-                                {/* 评论按钮 */}
                                 <button
                                     onClick={() => toggleComments(box.id)}
                                     className="text-blue-600 hover:underline text-sm"
                                 >
                                     {expandedId === box.id ? "收起评论" : "查看/添加评论"}
                                 </button>
-
-                                {/* 抽盲盒按钮 */}
                                 <button
                                     onClick={() => handleDrawBox(box)}
                                     className="ml-4 text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700"
                                 >
                                     抽盲盒
                                 </button>
-
                                 {expandedId === box.id && (
                                     <div className="mt-2 bg-gray-50 p-3 rounded text-sm space-y-2">
                                         {box.comments.length === 0 ? (
@@ -232,7 +220,6 @@ function AllBlindBox() {
                                                 </div>
                                             ))
                                         )}
-
                                         <div className="mt-2">
                                             <textarea
                                                 rows={2}
